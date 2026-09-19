@@ -22,5 +22,7 @@ jobs:
 
       - name: Print Target Environment
         # Extracting the user input using GitHub Context variables
-        run: echo "Deploying application to the ${{ inputs.environment }} environment!"
+        env:
+          TARGET_ENV: ${{ github.event.inputs.environment }}
+        run: echo "Deploying application to the $TARGET_ENV environment!"
         
