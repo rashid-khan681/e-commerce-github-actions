@@ -4,7 +4,7 @@ name: Manual Deploy Workflow
 on:
   workflow_dispatch:
     inputs:
-      environments:
+      target_env:
         description: 'Target Environment (Staging/production)'
         required: true
         default: 'staging'
