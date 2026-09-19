@@ -1,0 +1,20 @@
+# GOAL: Execute the first basic GitHub Actions pipeline to verify CI setup
+# TRIGGER: Executes automatically on every push to any branch
+
+name: Hello Workflow
+
+on:
+  push:
+
+jobs:
+  # JOB 1: A simple greeting job to test runner execution and checkout
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Check out the repository code onto the runner's workspace
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Execute a basic shell command to verify the runner is active
+      - name: Print Greeting
+       run: echo "Hello from GitHub Actions!"
