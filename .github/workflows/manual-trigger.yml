@@ -21,8 +21,6 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Print Target Environment
-        # Extracting the user input using GitHub Context variables
-        env:
-          TARGET_ENV: ${{ github.event.inputs.environment }}
-        run: echo "Deploying application to the $TARGET_ENV environment!"
+        # Direct modern syntax with a non-reserved variable name
+        run: echo "Deploying application to the ${{ inputs.target_env }} environment!"
         
