@@ -34,3 +34,7 @@ jobs:
       # New Step: Print the exact Operating System of the runner
       - name: Print Runner OS
         run: echo "The runner OS is ${{ runner.os }}"
+
+      # INTENTIONAL FAILURE: Test how GitHub Actions handles exit codes
+      - name: Break the Pipeline 
+        run: echho "This is a typo and will crash the pipeline"
