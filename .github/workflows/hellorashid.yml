@@ -13,7 +13,7 @@ jobs:
     steps:
       # Step 1: Check out the repository code onto the runner's workspace
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # Step 2: Execute a basic shell command to verify the runner is active
       - name: Print Greeting
