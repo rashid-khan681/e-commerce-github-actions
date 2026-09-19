@@ -1,0 +1,26 @@
+# GOAL: Manually trigger a workflow with custom user inputs
+name: Manual Deploy Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environments:
+       description: 'Target Environment (Staging/production)'
+       required: true
+       default: 'staging'
+       type: choice
+       options:
+         - staging
+         - production 
+
+jobs:
+  manual-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v7
+
+      - name: Print Target Environment
+        # Extracting the user input using GitHub Context variables
+        run: echo "Deploying application to the ${{ github.event.inputs.environment }} environment!"
+        
