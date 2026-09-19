@@ -7,7 +7,7 @@ on:
   push:
 
 jobs:
-  # JOB 1: A simple greeting job to test runner execution and checkout
+  # JOB 1: Inspect the underlying runner OS, branch context, and filesystem
   greet:
     runs-on: ubuntu-latest
     steps:
@@ -18,3 +18,19 @@ jobs:
       # Step 2: Execute a basic shell command to verify the runner is active
       - name: Print Greeting
         run: echo "Hello from GitHub Actions!"
+
+      # New Step: Print system date and time
+      - name: Print system date and time
+        run: date
+
+      # New Step: Inject GitHub context variable to find branch name
+      - name: Print Branch Name
+        run: echo "Triggered branch is ${{ github.ref_name }}"
+
+      # New Step: List all files downloaded by the checkout action
+      - name: List Files in Repo
+        run: ls -la
+
+      # New Step: Print the exact Operating System of the runner
+      - name: Print Runner OS
+        run: echo "The runner OS is ${{ runner.os }}"
