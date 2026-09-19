@@ -1,0 +1,17 @@
+# GOAL: Run a scheduled job every day at midnight UTC
+name: Midnight Cron job
+
+on:
+  schedule:
+    # Syntax: Minute Hour Day Month Day-of-Week
+    - cron: '0 0 * * *'
+
+jobs:
+  nightly-backup-mock:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute Nightly Task
+        run: echo "Starting nightly database backup at 00:00 UTC..."
+
+      - name: Print system date
+        run: date 
