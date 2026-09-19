@@ -17,4 +17,4 @@ jobs:
 
       # Step 2: Execute a basic shell command to verify the runner is active
       - name: Print Greeting
-       run: echo "Hello from GitHub Actions!"
+        run: echo "Hello from GitHub Actions!"
