@@ -37,4 +37,4 @@ jobs:
 
       # INTENTIONAL FAILURE: Test how GitHub Actions handles exit codes
       - name: Break the Pipeline 
-        run: echho "This is a typo and will crash the pipeline"
+        run: echo "This is a typo and will crash the pipeline"
