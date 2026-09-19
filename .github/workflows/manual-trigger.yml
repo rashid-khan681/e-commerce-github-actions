@@ -5,13 +5,13 @@ on:
   workflow_dispatch:
     inputs:
       environments:
-       description: 'Target Environment (Staging/production)'
-       required: true
-       default: 'staging'
-       type: choice
-       options:
-         - staging
-         - production 
+        description: 'Target Environment (Staging/production)'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production 
 
 jobs:
   manual-deploy:
