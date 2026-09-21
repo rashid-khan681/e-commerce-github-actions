@@ -4,8 +4,10 @@
 name: Hello Workflow
 
 on:
-  push:
-
+  # push:
+  
+  workflow_dispatch:
+    
 jobs:
   # JOB 1: Inspect the underlying runner OS, branch context, and filesystem
   greet:
