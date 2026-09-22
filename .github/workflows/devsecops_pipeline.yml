@@ -3,8 +3,8 @@
 name: DevSecOps 
 
 on:
-    push:
-
+    #push:
+    workflow_dispatch:
 jobs:
     # Secrets Scan
     secret-scan:
