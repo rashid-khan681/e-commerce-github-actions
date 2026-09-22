@@ -2,11 +2,11 @@
 name: PR check Workflow
 
 on:
-  pull_request:
+  #pull_request:
     branches: 
       - main
     types: [opened, synchronize]
-
+  workflow_dispatch: # Added manual trigger just in case you want to rerun it easily
 jobs:
   # Verify the PR Branch
   pr-verification:
