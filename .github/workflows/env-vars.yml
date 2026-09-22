@@ -33,5 +33,3 @@ jobs:
                   echo "=== GitHub Default Variables ==="
                   echo "Triggered by Actor: ${{ github.actor }}"
                   echo "Commit SHA: ${{ github.sha }}"
-                    
-        
