@@ -3,7 +3,7 @@ name: Matrix Build Pipeline
 
 on:
   #push:
-    branches: [ main ]
+    #branches: [ main ]
   workflow_dispatch: # Added manual trigger just in case you want to rerun it easily
 
 jobs:
