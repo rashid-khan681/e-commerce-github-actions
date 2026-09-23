@@ -28,14 +28,15 @@ jobs:
         steps:
             - name: Check Branch - Main
               if: github.ref == 'refs/heads/main'
-              run: echo "Branch Type: This is a push to the MAIN branch."
+              run: | 
+                echo "Branch Type: This is a push to the MAIN branch."
 
             - name: Check Branch - Feature
               if: github.ref != 'refs/heads/main'
-              run: echo "Branch Type: This is a push to a FEATURE branch."
+              run: | 
+                echo "Branch Type: This is a push to a FEATURE branch."
 
             - name: Print Commit Message
               run: |
                 echo "=== Commit Details ==="
                 echo "Commit Message: ${{ github.event.commits[0].message }}"
-                
