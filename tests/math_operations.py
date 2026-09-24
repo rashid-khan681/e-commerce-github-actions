@@ -6,7 +6,7 @@ def add(a, b):
 print("=== Running Unit Tests")
 
 # Intentionally making it FAIL first (2+2 != 5)
-expected = 5
+expected = 4
 result = add(2, 2)
 
 if result == expected:
