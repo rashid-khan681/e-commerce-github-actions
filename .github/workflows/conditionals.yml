@@ -34,13 +34,13 @@ jobs:
                     echo "I am running normally because the previous error was ignored."
 
             # 4. A step that actually fails and stops thr normal flow
-            - name: 4. Intentional Failure Step
-              run: |
-                    echo "I am going to cause a real failure now..."
-                    exit 1  # This will cause the job to fail and stop further execution of steps"
+            #- name: 4. Intentional Failure Step
+              #run: |
+                    #echo "I am going to cause a real failure now..."
+                    #exit 1  # This will cause the job to fail and stop further execution of steps"
 
             # 5. Step runs only if the previous step failed (using 'failure()' function)
-            - name: 5. Catch Failure Step
-              if: failure()
-              run: | 
-                    echo "Executing this because a previous step failed! (Perfect for Slack alerts)"
+            #- name: 5. Catch Failure Step
+             #if: failure()
+              #run: | 
+               #     echo "Executing this because a previous step failed! (Perfect for Slack alerts)"
