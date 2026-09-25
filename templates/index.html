@@ -3,85 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NOVA PRIME — Premium Store</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <title>NOVA PRIME — Aesthetic Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
   <style>
     /* Reset & Base */
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; color: #111; background: #fafafa; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', sans-serif; color: #111; background: #fdfdfd; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
     button { font: inherit; cursor: pointer; border: 0; outline: none; }
-    .container { width: min(1180px, 92%); margin: auto; }
+    .container { width: min(1200px, 92%); margin: auto; }
 
-    /* Premium Header */
+    /* Aesthetic Header */
     header { 
       position: sticky; top: 0; z-index: 50; 
-      background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); 
-      border-bottom: 1px solid rgba(0,0,0,0.05); 
+      background: rgba(255,255,255,0.9); backdrop-filter: blur(16px); 
+      border-bottom: 1px solid rgba(0,0,0,0.03); 
     }
-    .nav { height: 80px; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-size: 24px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; display: flex; align-items: center; gap: 4px; }
-    .logo span { color: #888; font-weight: 500; }
+    .nav { height: 85px; display: flex; align-items: center; justify-content: space-between; }
     
-    /* Sleek Nav Links */
-    .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; color: #555; }
-    .nav-links a { position: relative; padding-bottom: 4px; transition: color 0.3s; }
-    .nav-links a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: #111; transition: width 0.3s ease; }
-    .nav-links a:hover { color: #111; }
+    /* The Requested Logo: Black + Orange + Aesthetic Shadow */
+    .logo { 
+      font-size: 30px; 
+      font-weight: 900; 
+      letter-spacing: -1.5px; 
+      text-transform: uppercase; 
+      display: flex; 
+      align-items: center; 
+      /* Subtle drop shadow behind the whole logo to make it pop */
+      filter: drop-shadow(0px 8px 12px rgba(0,0,0,0.1));
+    }
+    .logo-nova { color: #000; }
+    /* Vibrant Orange with its own glow */
+    .logo-prime { color: #FF5722; text-shadow: 0 4px 15px rgba(255, 87, 34, 0.35); margin-left: 2px; }
+    
+    /* Nav Links with Orange Hover */
+    .nav-links { display: flex; gap: 35px; font-size: 14px; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
+    .nav-links a { position: relative; padding-bottom: 6px; transition: color 0.3s; }
+    .nav-links a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: #FF5722; transition: width 0.3s ease; }
+    .nav-links a:hover { color: #FF5722; }
     .nav-links a:hover::after { width: 100%; }
     
     /* Interactive Cart */
-    .cart { background: #111; color: #fff; padding: 12px 24px; border-radius: 999px; font-size: 14px; font-weight: 500; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
-    .cart:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); background: #000; }
+    .cart { background: #000; color: #fff; padding: 12px 28px; border-radius: 999px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .cart:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255, 87, 34, 0.4); background: #FF5722; }
 
-    /* Upgraded Hero Section */
-    .hero { margin-top: 32px; min-height: 520px; border-radius: 24px; overflow: hidden; position: relative; display: flex; align-items: center; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    /* Aesthetic Hero Section */
+    .hero { margin-top: 30px; min-height: 550px; border-radius: 28px; overflow: hidden; position: relative; display: flex; align-items: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); }
     .hero-bg { 
       position: absolute; inset: 0; 
-      background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 100%), 
+      background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100%), 
       url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=85") center/cover; 
-      z-index: 1; transform: scale(1); transition: transform 8s ease; 
+      z-index: 1; transform: scale(1); transition: transform 10s ease; 
     }
-    .hero:hover .hero-bg { transform: scale(1.03); }
-    .hero-content { position: relative; z-index: 2; max-width: 600px; padding: 60px; color: white; animation: slideUp 1s ease 0.2s forwards; opacity: 0; transform: translateY(20px); }
-    .eyebrow { text-transform: uppercase; letter-spacing: 3px; font-size: 12px; font-weight: 700; margin-bottom: 16px; display: inline-block; padding: 6px 12px; background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); border-radius: 999px; }
-    h1 { font-size: clamp(40px, 5vw, 64px); line-height: 1.05; letter-spacing: -2px; margin-bottom: 20px; font-weight: 900; text-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-    .hero p { font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 32px; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; background: white; color: #111; padding: 16px 32px; border-radius: 999px; font-weight: 600; transition: all 0.3s ease; }
-    .btn:hover { background: #f0f0f0; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-
-    /* Product Cards with Smooth Hover */
-    section { padding: 80px 0; }
-    .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; }
-    .section-head h2 { font-size: 32px; letter-spacing: -1px; font-weight: 800; }
-    .section-head span { color: #666; font-size: 15px; font-weight: 500; }
-
-    .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .card { background: #fff; border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.04); cursor: pointer; }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-    .img-wrap { overflow: hidden; height: 300px; }
-    .card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .card:hover img { transform: scale(1.06); }
-    .info { padding: 24px; }
-    .category { color: #888; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-    .name { font-weight: 700; font-size: 18px; margin-bottom: 16px; color: #111; }
-    .price-row { display: flex; justify-content: space-between; align-items: center; }
-    .price { font-weight: 800; font-size: 18px; }
+    .hero:hover .hero-bg { transform: scale(1.05); }
+    .hero-content { position: relative; z-index: 2; max-width: 650px; padding: 70px; color: white; animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(30px); }
     
-    /* Add to Cart Plus Button */
-    .add { width: 40px; height: 40px; border-radius: 50%; background: #f4f4f4; color: #111; font-size: 20px; font-weight: 400; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
-    .card:hover .add { background: #111; color: #fff; transform: rotate(90deg); }
+    .eyebrow { text-transform: uppercase; letter-spacing: 4px; font-size: 11px; font-weight: 800; margin-bottom: 20px; display: inline-block; padding: 8px 16px; background: rgba(255, 87, 34, 0.9); color: #fff; border-radius: 999px; box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3); }
+    h1 { font-size: clamp(45px, 6vw, 72px); line-height: 1; letter-spacing: -2.5px; margin-bottom: 24px; font-weight: 900; text-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .hero p { font-size: 18px; line-height: 1.7; color: rgba(255,255,255,0.85); margin-bottom: 35px; font-weight: 400; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+    
+    .btn { display: inline-flex; align-items: center; justify-content: center; background: #fff; color: #000; padding: 18px 36px; border-radius: 999px; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .btn:hover { background: #FF5722; color: #fff; transform: translateY(-4px); box-shadow: 0 15px 30px rgba(255, 87, 34, 0.3); }
 
-    /* Minimalist Features */
-    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 20px 0 80px; }
-    .feature { background: #fff; padding: 40px 32px; border-radius: 24px; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.04); }
-    .feature:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
-    .feature b { display: block; margin-bottom: 12px; font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
-    .feature p { color: #666; font-size: 14px; line-height: 1.6; }
+    /* Curated Products Section */
+    section { padding: 90px 0; }
+    .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 45px; }
+    .section-head h2 { font-size: 36px; letter-spacing: -1.5px; font-weight: 900; color: #000; }
+    .section-head span { color: #FF5722; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 
-    footer { padding: 40px 0; border-top: 1px solid rgba(0,0,0,0.05); color: #666; font-size: 14px; font-weight: 500; display: flex; justify-content: space-between; }
+    .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+    .card { background: #fff; border-radius: 24px; overflow: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 20px rgba(0,0,0,0.03); cursor: pointer; position: relative; }
+    .card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
+    .img-wrap { overflow: hidden; height: 320px; position: relative; }
+    .card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .card:hover img { transform: scale(1.08); }
+    
+    .info { padding: 25px; background: #fff; position: relative; z-index: 2; }
+    .category { color: #999; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+    .name { font-weight: 800; font-size: 18px; margin-bottom: 16px; color: #000; letter-spacing: -0.5px; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; }
+    .price { font-weight: 900; font-size: 20px; color: #111; }
+    
+    /* Aesthetic Plus Button */
+    .add { width: 45px; height: 45px; border-radius: 50%; background: #f0f0f0; color: #000; font-size: 22px; font-weight: 500; display: flex; align-items: center; justify-content: center; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .card:hover .add { background: #FF5722; color: #fff; transform: rotate(90deg) scale(1.1); box-shadow: 0 8px 20px rgba(255, 87, 34, 0.3); }
 
-    @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+    /* Premium Features Bottom */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin: 30px 0 90px; }
+    .feature { background: #fff; padding: 45px 35px; border-radius: 28px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.02); }
+    .feature:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); border-color: rgba(255, 87, 34, 0.1); }
+    .feature b { display: block; margin-bottom: 15px; font-size: 19px; font-weight: 800; letter-spacing: -0.5px; color: #000; }
+    .feature p { color: #666; font-size: 15px; line-height: 1.6; }
+
+    footer { padding: 45px 0; border-top: 1px solid rgba(0,0,0,0.05); color: #888; font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; text-transform: uppercase; letter-spacing: 1px; }
+    .footer-logo { color: #000; font-weight: 900; }
+    .footer-logo span { color: #FF5722; }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
     @media (max-width: 900px) {
       .products { grid-template-columns: repeat(2, 1fr); }
@@ -94,7 +112,9 @@
 
 <header>
   <div class="container nav">
-    <div class="logo">NOVA <span>PRIME</span></div>
+    <div class="logo">
+      <span class="logo-nova">NOVA</span><span class="logo-prime">PRIME</span>
+    </div>
     <nav class="nav-links">
       <a href="#">New arrivals</a>
       <a href="#">Men</a>
@@ -109,7 +129,7 @@
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <div class="eyebrow">Premium Collection</div>
+      <div class="eyebrow">Season 2026</div>
       <h1>Everyday essentials, elevated.</h1>
       <p>Thoughtfully designed pieces for modern everyday living. Clean, comfortable and engineered to last.</p>
       <a class="btn" href="#shop">Shop collection →</a>
@@ -170,7 +190,7 @@
 
 <footer>
   <div class="container">
-    <div>© 2026 NOVA PRIME.</div>
+    <div class="footer-logo">© 2026 NOVA <span>PRIME</span>.</div>
     <div>Engineered for the modern world.</div>
   </div>
 </footer>
