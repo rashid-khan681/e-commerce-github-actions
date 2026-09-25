@@ -1,11 +1,10 @@
-# Goal: Authenticate with Docker Hub, build the image, and push with dual tags (latest & short-sha)
+# GOAL: Build images on all branches to test them, but ONLY push to Docker Hub if the branch is 'main'.
 
 name: Day 45 - Docker build and publish
 
 on:
     push:
-        branches:
-            - main
+        
     workflow_dispatch:
 
 jobs:
@@ -33,7 +32,7 @@ jobs:
               uses: docker/build-push-action@v5
               with:
                 context: .
-                push: true
+                push: ${{ github.ref == 'refs/heads/main' }}
                 tags: |
                   ${{ secrets.DOCKER_USERNAME }}/my-ecommerce-app:latest
                   ${{ secrets.DOCKER_USERNAME }}/my-ecommerce-app:sha-${{ env.SHORT_SHA }}
