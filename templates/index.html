@@ -99,16 +99,19 @@
   .hero-bg{
     position:absolute;inset:0;
     background:url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=80") center/cover;
-    filter:grayscale(0.35) brightness(0.55);
+    filter:contrast(1.12) saturate(1.1) brightness(0.86);
     transition:filter .6s ease;
   }
   .hero-tint{
     position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(10,12,15,0.1) 0%, rgba(10,12,15,0.95) 100%);
+    background:
+      linear-gradient(100deg, rgba(6,8,10,0.94) 0%, rgba(6,8,10,0.68) 32%, rgba(6,8,10,0.22) 58%, rgba(6,8,10,0) 78%),
+      linear-gradient(0deg, rgba(6,8,10,0.8) 0%, rgba(6,8,10,0) 40%);
   }
   .hero-tint::after{
     content:'';position:absolute;inset:0;
-    background:radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%);
+    background:radial-gradient(circle at 10% 15%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 55%);
+    mix-blend-mode:overlay;
     transition:background .5s ease;
   }
   .hero-content{position:relative;z-index:2;padding:52px;max-width:560px;}
@@ -148,9 +151,24 @@
     opacity:0;transform:scale(0.96);
     pointer-events:none;position:absolute;visibility:hidden;
   }
-  .img-wrap{height:230px;overflow:hidden;background:var(--surface-2);}
-  .card img{width:100%;height:100%;object-fit:cover;filter:grayscale(0.15) brightness(0.92);transition:transform .5s ease;}
+  .img-wrap{
+    height:230px;overflow:hidden;position:relative;
+    padding:18px;
+    background:linear-gradient(160deg,#e9e5dd 0%,#d9d4c9 100%);
+    border-radius:16px 16px 0 0;
+  }
+  .card img{width:100%;height:100%;object-fit:contain;filter:contrast(1.04) saturate(1.03);transition:transform .5s ease;}
   .card:hover img{transform:scale(1.05);}
+  .wish{
+    position:absolute;top:12px;right:12px;z-index:2;
+    width:32px;height:32px;border-radius:50%;
+    background:rgba(6,8,10,0.55);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;
+    transition:background .25s ease;
+  }
+  .wish svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;transition:fill .25s ease, stroke .25s ease;}
+  .wish.active svg{fill:var(--accent);stroke:var(--accent);}
+  .wish:hover{background:rgba(6,8,10,0.8);}
   .info{padding:18px 18px 20px;}
   .tag{
     display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.4px;
@@ -177,6 +195,20 @@
   }
   .feature b{display:block;margin-bottom:8px;font-size:15px;font-weight:700;}
   .feature p{color:var(--muted);font-size:13px;line-height:1.6;}
+
+  #toast{
+    position:fixed;bottom:28px;left:50%;
+    transform:translate(-50%, 20px);
+    background:var(--surface-2);border:1px solid var(--line);
+    color:var(--text);padding:12px 20px;border-radius:999px;
+    font-size:13px;font-weight:600;
+    display:flex;align-items:center;gap:10px;
+    opacity:0;pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease;
+    z-index:100;
+  }
+  #toast.show{opacity:1;transform:translate(-50%, 0);}
+  #toast .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
 
   footer{
     padding:32px 0;border-top:1px solid var(--line);
@@ -235,92 +267,92 @@
     <div class="products-wrap">
       <div class="products">
         <article class="card" data-brand="nova">
-          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=80" alt="Grey parka jacket"></div>
+          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=80" alt="Grey parka jacket"><button class="wish" onclick="toggleWish(event)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.4C.7 9.1 2.7 5.6 6.3 5.2c2-.2 3.8.8 5.7 2.8 1.9-2 3.7-3 5.7-2.8 3.6.4 5.6 3.9 3.8 7.4C19 16.7 12 21 12 21z"/></svg></button></div>
           <div class="info">
             <div class="tag">NOVA</div>
             <div class="name">Glacier Parka</div>
-            <div class="price-row"><span class="price">₹7,999</span><button class="add" onclick="addToCart()">+</button></div>
+            <div class="price-row"><span class="price">₹7,999</span><button class="add" onclick="addToCart(event)">+</button></div>
           </div>
         </article>
 
         <article class="card" data-brand="nova">
-          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80" alt="Grey knit hoodie"></div>
+          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80" alt="Grey knit hoodie"><button class="wish" onclick="toggleWish(event)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.4C.7 9.1 2.7 5.6 6.3 5.2c2-.2 3.8.8 5.7 2.8 1.9-2 3.7-3 5.7-2.8 3.6.4 5.6 3.9 3.8 7.4C19 16.7 12 21 12 21z"/></svg></button></div>
           <div class="info">
             <div class="tag">NOVA</div>
             <div class="name">Frost Knit Hoodie</div>
-            <div class="price-row"><span class="price">₹3,299</span><button class="add" onclick="addToCart()">+</button></div>
+            <div class="price-row"><span class="price">₹3,299</span><button class="add" onclick="addToCart(event)">+</button></div>
           </div>
         </article>
 
         <article class="card" data-brand="nova">
-          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80" alt="Running shoes"></div>
+          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80" alt="Running shoes"><button class="wish" onclick="toggleWish(event)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.4C.7 9.1 2.7 5.6 6.3 5.2c2-.2 3.8.8 5.7 2.8 1.9-2 3.7-3 5.7-2.8 3.6.4 5.6 3.9 3.8 7.4C19 16.7 12 21 12 21z"/></svg></button></div>
           <div class="info">
             <div class="tag">NOVA</div>
             <div class="name">Urban Runner</div>
-            <div class="price-row"><span class="price">₹6,999</span><button class="add" onclick="addToCart()">+</button></div>
+            <div class="price-row"><span class="price">₹6,999</span><button class="add" onclick="addToCart(event)">+</button></div>
           </div>
         </article>
 
         <article class="card" data-brand="nova">
-          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=700&q=80" alt="Black leather boots"></div>
+          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=700&q=80" alt="Black leather boots"><button class="wish" onclick="toggleWish(event)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.4C.7 9.1 2.7 5.6 6.3 5.2c2-.2 3.8.8 5.7 2.8 1.9-2 3.7-3 5.7-2.8 3.6.4 5.6 3.9 3.8 7.4C19 16.7 12 21 12 21z"/></svg></button></div>
           <div class="info">
             <div class="tag">NOVA</div>
             <div class="name">Arctic Trail Boots</div>
-            <div class="price-row"><span class="price">₹5,499</span><button class="add" onclick="addToCart()">+</button></div>
+            <div class="price-row"><span class="price">₹5,499</span><button class="add" onclick="addToCart(event)">+</button></div>
           </div>
         </article>
 
         <article class="card" data-brand="nova">
-          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80" alt="Chronograph watch"></div>
+          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80" alt="Chronograph watch"><button class="wish" onclick="toggleWish(event)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.4C.7 9.1 2.7 5.6 6.3 5.2c2-.2 3.8.8 5.7 2.8 1.9-2 3.7-3 5.7-2.8 3.6.4 5.6 3.9 3.8 7.4C19 16.7 12 21 12 21z"/></svg></button></div>
           <div class="info">
             <div class="tag">NOVA</div>
             <div class="name">Prime Chronograph</div>
-            <div class="price-row"><span class="price">₹8,499</span><button class="add" onclick="addToCart()">+</button></div>
+            <div class="price-row"><span class="price">₹8,499</span><button class="add" onclick="addToCart(event)">+</button></div>
           </div>
         </article>
 
         <article class="card" data-brand="prime">
-          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=700&q=80" alt="Orange bomber jacket"></div>
+          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=700&q=80" alt="Orange bomber jacket"><button class="wish" onclick="toggleWish(event)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.4C.7 9.1 2.7 5.6 6.3 5.2c2-.2 3.8.8 5.7 2.8 1.9-2 3.7-3 5.7-2.8 3.6.4 5.6 3.9 3.8 7.4C19 16.7 12 21 12 21z"/></svg></button></div>
           <div class="info">
             <div class="tag">PRIME</div>
             <div class="name">Ember Bomber Jacket</div>
-            <div class="price-row"><span class="price">₹6,499</span><button class="add" onclick="addToCart()">+</button></div>
+            <div class="price-row"><span class="price">₹6,499</span><button class="add" onclick="addToCart(event)">+</button></div>
           </div>
         </article>
 
         <article class="card" data-brand="prime">
-          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80" alt="Orange street t-shirt"></div>
+          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80" alt="Orange street t-shirt"><button class="wish" onclick="toggleWish(event)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.4C.7 9.1 2.7 5.6 6.3 5.2c2-.2 3.8.8 5.7 2.8 1.9-2 3.7-3 5.7-2.8 3.6.4 5.6 3.9 3.8 7.4C19 16.7 12 21 12 21z"/></svg></button></div>
           <div class="info">
             <div class="tag">PRIME</div>
             <div class="name">Solar Street Tee</div>
-            <div class="price-row"><span class="price">₹1,899</span><button class="add" onclick="addToCart()">+</button></div>
+            <div class="price-row"><span class="price">₹1,899</span><button class="add" onclick="addToCart(event)">+</button></div>
           </div>
         </article>
 
         <article class="card" data-brand="prime">
-          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=700&q=80" alt="Orange high-top sneakers"></div>
+          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=700&q=80" alt="Orange high-top sneakers"><button class="wish" onclick="toggleWish(event)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.4C.7 9.1 2.7 5.6 6.3 5.2c2-.2 3.8.8 5.7 2.8 1.9-2 3.7-3 5.7-2.8 3.6.4 5.6 3.9 3.8 7.4C19 16.7 12 21 12 21z"/></svg></button></div>
           <div class="info">
             <div class="tag">PRIME</div>
             <div class="name">Blaze High-Tops</div>
-            <div class="price-row"><span class="price">₹5,999</span><button class="add" onclick="addToCart()">+</button></div>
+            <div class="price-row"><span class="price">₹5,999</span><button class="add" onclick="addToCart(event)">+</button></div>
           </div>
         </article>
 
         <article class="card" data-brand="prime">
-          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=80" alt="Black backpack"></div>
+          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=80" alt="Black backpack"><button class="wish" onclick="toggleWish(event)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.4C.7 9.1 2.7 5.6 6.3 5.2c2-.2 3.8.8 5.7 2.8 1.9-2 3.7-3 5.7-2.8 3.6.4 5.6 3.9 3.8 7.4C19 16.7 12 21 12 21z"/></svg></button></div>
           <div class="info">
             <div class="tag">PRIME</div>
             <div class="name">Vanguard Backpack</div>
-            <div class="price-row"><span class="price">₹4,299</span><button class="add" onclick="addToCart()">+</button></div>
+            <div class="price-row"><span class="price">₹4,299</span><button class="add" onclick="addToCart(event)">+</button></div>
           </div>
         </article>
 
         <article class="card" data-brand="prime">
-          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80" alt="Sunglasses"></div>
+          <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80" alt="Sunglasses"><button class="wish" onclick="toggleWish(event)"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.3-9.5-8.4C.7 9.1 2.7 5.6 6.3 5.2c2-.2 3.8.8 5.7 2.8 1.9-2 3.7-3 5.7-2.8 3.6.4 5.6 3.9 3.8 7.4C19 16.7 12 21 12 21z"/></svg></button></div>
           <div class="info">
             <div class="tag">PRIME</div>
             <div class="name">Aero Sunglasses X</div>
-            <div class="price-row"><span class="price">₹2,499</span><button class="add" onclick="addToCart()">+</button></div>
+            <div class="price-row"><span class="price">₹2,499</span><button class="add" onclick="addToCart(event)">+</button></div>
           </div>
         </article>
       </div>
@@ -341,14 +373,36 @@
   </div>
 </footer>
 
+<div id="toast"><span class="dot"></span><span id="toastMsg">Added to cart</span></div>
+
 <script>
   let count = 0;
-  function addToCart() {
+  let toastTimer;
+  function addToCart(e) {
+    if (e) e.stopPropagation();
     count++;
     document.getElementById("cartCount").textContent = count;
+    const name = e ? e.target.closest('.card').querySelector('.name').textContent : 'Item';
+    showToast(`${name} added to cart`);
   }
   function showCart() {
     alert(count ? `You have ${count} item${count > 1 ? "s" : ""} in your cart.` : "Your cart is empty.");
+  }
+  function toggleWish(e) {
+    e.stopPropagation();
+    const btn = e.target.closest('.wish');
+    btn.classList.toggle('active');
+    if (btn.classList.contains('active')) {
+      const name = btn.closest('.card').querySelector('.name').textContent;
+      showToast(`${name} saved to wishlist`);
+    }
+  }
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
   }
 
   const copy = {
