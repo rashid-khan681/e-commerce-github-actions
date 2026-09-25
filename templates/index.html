@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nova — Modern Store</title>
+  <title>NOVA PRIME — Advanced Store</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: Inter, Arial, sans-serif; color: #171717; background: #fafafa; }
@@ -11,52 +11,86 @@
     button { font: inherit; cursor: pointer; border: 0; }
     .container { width: min(1180px, 92%); margin: auto; }
 
+    /* Header & Navigation */
     header {
       position: sticky; top: 0; z-index: 10;
       background: rgba(255,255,255,.94); backdrop-filter: blur(10px);
       border-bottom: 1px solid #eee;
     }
     .nav { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
-    .logo { font-size: 24px; font-weight: 900; letter-spacing: -1px; }
-    .nav-links { display: flex; gap: 28px; font-size: 14px; color: #555; }
+    
+    /* Sleek Nova Prime Logo */
+    .logo { font-size: 26px; font-weight: 900; letter-spacing: -1.5px; text-transform: uppercase; }
+    .logo span { font-weight: 300; color: #555; margin-left: 2px; }
+    
+    /* Animated Nav Links */
+    .nav-links { display: flex; gap: 32px; font-size: 14px; color: #555; font-weight: 500; }
+    .nav-links a { position: relative; padding-bottom: 4px; transition: color 0.3s; }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px;
+      background: #111; transition: width 0.3s ease;
+    }
     .nav-links a:hover { color: #000; }
-    .cart { background: #111; color: #fff; padding: 11px 16px; border-radius: 999px; font-size: 14px; }
+    .nav-links a:hover::after { width: 100%; }
 
+    /* Interactive Cart Button */
+    .cart { background: #111; color: #fff; padding: 11px 20px; border-radius: 999px; font-size: 14px; transition: all 0.3s ease; border: 1px solid #111; }
+    .cart:hover { background: #fff; color: #111; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+    /* Advanced Hero Section with Animations */
     .hero {
-      margin-top: 28px; min-height: 430px; border-radius: 28px; overflow: hidden;
+      margin-top: 28px; min-height: 480px; border-radius: 28px; overflow: hidden;
       background:
-        linear-gradient(90deg, rgba(0,0,0,.7), rgba(0,0,0,.08)),
+        linear-gradient(90deg, rgba(0,0,0,.8), rgba(0,0,0,.15)),
         url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=85") center/cover;
       display: flex; align-items: center; color: white;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
     }
-    .hero-content { max-width: 570px; padding: 55px; }
-    .eyebrow { text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-weight: 700; opacity: .8; }
-    h1 { font-size: clamp(42px, 6vw, 72px); line-height: .95; letter-spacing: -4px; margin: 16px 0; }
-    .hero p { font-size: 17px; line-height: 1.6; color: #eee; margin-bottom: 25px; }
-    .btn { display: inline-block; background: white; color: #111; padding: 13px 20px; border-radius: 999px; font-weight: 700; }
+    .hero-content { max-width: 600px; padding: 65px; perspective: 1000px; }
+    
+    /* Fade-up Keyframes */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content > * { opacity: 0; animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    
+    .eyebrow { text-transform: uppercase; letter-spacing: 3px; font-size: 12px; font-weight: 700; opacity: .8; animation-delay: 0.1s; }
+    h1 { font-size: clamp(48px, 6vw, 76px); line-height: .95; letter-spacing: -3px; margin: 18px 0; animation-delay: 0.2s; text-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    .hero p { font-size: 18px; line-height: 1.6; color: #f0f0f0; margin-bottom: 30px; animation-delay: 0.3s; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    
+    .btn { display: inline-block; background: white; color: #111; padding: 15px 28px; border-radius: 999px; font-weight: 700; animation-delay: 0.4s; transition: all 0.3s ease; }
+    .btn:hover { background: #111; color: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.3); transform: translateY(-3px); }
 
-    section { padding: 70px 0 10px; }
-    .section-head { display: flex; align-items: end; justify-content: space-between; margin-bottom: 25px; }
-    .section-head h2 { font-size: 32px; letter-spacing: -1.5px; }
-    .section-head span { color: #777; font-size: 14px; }
+    /* Product Section */
+    section { padding: 80px 0 20px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; margin-bottom: 35px; }
+    .section-head h2 { font-size: 34px; letter-spacing: -1.5px; font-weight: 800; }
+    .section-head span { color: #777; font-size: 15px; }
 
-    .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .card { background: #fff; border: 1px solid #eee; border-radius: 18px; overflow: hidden; transition: .2s; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
-    .card img { width: 100%; height: 270px; object-fit: cover; display: block; background: #f3f3f3; }
-    .info { padding: 17px; }
+    .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .card { background: #fff; border: 1px solid #eaeaea; border-radius: 20px; overflow: hidden; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,.08); border-color: transparent; }
+    .card img { width: 100%; height: 280px; object-fit: cover; display: block; background: #f3f3f3; transition: transform 0.5s ease; }
+    .card:hover img { transform: scale(1.03); }
+    .info { padding: 20px; position: relative; z-index: 2; background: #fff; }
     .category { color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-    .name { font-weight: 700; margin: 7px 0 12px; }
+    .name { font-weight: 700; margin: 8px 0 16px; font-size: 17px; }
     .price-row { display: flex; justify-content: space-between; align-items: center; }
-    .price { font-weight: 800; }
-    .add { width: 34px; height: 34px; border-radius: 50%; background: #111; color: white; }
+    .price { font-weight: 800; font-size: 18px; }
+    
+    /* Animated Add Button */
+    .add { width: 38px; height: 38px; border-radius: 50%; background: #111; color: white; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-size: 20px; display: flex; align-items: center; justify-content: center; }
+    .add:hover { background: #000; transform: scale(1.15) rotate(90deg); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 65px 0; }
-    .feature { background: #f1f1ed; padding: 25px; border-radius: 18px; }
-    .feature b { display: block; margin-bottom: 8px; }
-    .feature p { color: #666; font-size: 14px; line-height: 1.5; }
+    /* Features Section */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 80px 0; }
+    .feature { background: #fff; border: 1px solid #eaeaea; padding: 30px; border-radius: 20px; transition: transform 0.3s ease; }
+    .feature:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .feature b { display: block; margin-bottom: 10px; font-size: 16px; font-weight: 800; }
+    .feature p { color: #666; font-size: 14px; line-height: 1.6; }
 
-    footer { margin-top: 50px; padding: 35px 0; border-top: 1px solid #eee; color: #777; font-size: 13px; }
+    footer { margin-top: 60px; padding: 40px 0; border-top: 1px solid #eee; color: #777; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
 
     @media (max-width: 900px) {
       .products { grid-template-columns: repeat(2, 1fr); }
@@ -64,10 +98,10 @@
       .nav-links { display: none; }
     }
     @media (max-width: 560px) {
-      .hero-content { padding: 32px; }
+      .hero-content { padding: 35px; }
       h1 { letter-spacing: -2px; }
       .products { grid-template-columns: 1fr; }
-      .card img { height: 320px; }
+      .card img { height: 340px; }
     }
   </style>
 </head>
@@ -75,7 +109,7 @@
 
 <header>
   <div class="container nav">
-    <div class="logo">DevOps - Zero To Hero [AI Powered]</div>
+    <div class="logo">NOVA <span>PRIME</span></div>
     <nav class="nav-links">
       <a href="#">New arrivals</a>
       <a href="#">Men</a>
@@ -89,9 +123,9 @@
 <main class="container">
   <section class="hero">
     <div class="hero-content">
-      <div class="eyebrow">New season / 2026</div>
+      <div class="eyebrow">The Vanguard Collection</div>
       <h1>Everyday essentials, elevated.</h1>
-      <p>Thoughtfully designed pieces for modern everyday living. Clean, comfortable and made to last.</p>
+      <p>Thoughtfully designed pieces for modern everyday living. Clean, comfortable and engineered to last.</p>
       <a class="btn" href="#shop">Shop collection →</a>
     </div>
   </section>
@@ -107,7 +141,7 @@
         <img loading="lazy" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80" alt="Minimal watch">
         <div class="info">
           <div class="category">Accessories</div>
-          <div class="name">Minimal Chronograph</div>
+          <div class="name">Prime Chronograph</div>
           <div class="price-row"><span class="price">₹8,499</span><button class="add" onclick="addToCart()">+</button></div>
         </div>
       </article>
@@ -116,7 +150,7 @@
         <img loading="lazy" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80" alt="Running shoes">
         <div class="info">
           <div class="category">Footwear</div>
-          <div class="name">Urban Runner</div>
+          <div class="name">Nova Urban Runner</div>
           <div class="price-row"><span class="price">₹6,999</span><button class="add" onclick="addToCart()">+</button></div>
         </div>
       </article>
@@ -125,7 +159,7 @@
         <img loading="lazy" src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=80" alt="Black backpack">
         <div class="info">
           <div class="category">Bags</div>
-          <div class="name">Everyday Backpack</div>
+          <div class="name">Vanguard Backpack</div>
           <div class="price-row"><span class="price">₹4,299</span><button class="add" onclick="addToCart()">+</button></div>
         </div>
       </article>
@@ -134,7 +168,7 @@
         <img loading="lazy" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80" alt="Sunglasses">
         <div class="info">
           <div class="category">Accessories</div>
-          <div class="name">Aero Sunglasses</div>
+          <div class="name">Aero Sunglasses X</div>
           <div class="price-row"><span class="price">₹2,499</span><button class="add" onclick="addToCart()">+</button></div>
         </div>
       </article>
@@ -142,14 +176,17 @@
   </section>
 
   <div class="features">
-    <div class="feature"><b>Free shipping</b><p>Free delivery on orders above ₹999.</p></div>
+    <div class="feature"><b>Priority shipping</b><p>Free next-day delivery on orders above ₹999.</p></div>
     <div class="feature"><b>Easy returns</b><p>Simple 14-day returns on eligible products.</p></div>
-    <div class="feature"><b>Secure checkout</b><p>Your payments and personal information stay protected.</p></div>
+    <div class="feature"><b>Secure checkout</b><p>Enterprise-grade protection for your payments.</p></div>
   </div>
 </main>
 
 <footer>
-  <div class="container">© 2026 NOVA. — Built for modern shopping.</div>
+  <div class="container">
+    <div>© 2026 NOVA PRIME.</div>
+    <div>Engineered for the modern world.</div>
+  </div>
 </footer>
 
 <script>
