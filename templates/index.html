@@ -1,295 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NOVA PRIME | Future of Fashion</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOVA PRIME — Premium Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap');
-    
-    body { font-family: 'Rajdhani', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; }
-    h1, h2, h3, .logo { font-family: 'Orbitron', sans-serif; }
-    
-    /* Cyberpunk Grid Background */
-    .bg-grid {
-      background-size: 40px 40px;
-      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
-    }
-    
-    /* Neon Glow Effects */
-    .neon-text { text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.5); }
-    .neon-box { box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1); border: 1px solid rgba(0, 255, 255, 0.5); }
-    .neon-box-purple { box-shadow: 0 0 15px rgba(188, 19, 254, 0.3), inset 0 0 10px rgba(188, 19, 254, 0.1); border: 1px solid rgba(188, 19, 254, 0.5); }
-    
-    /* Hero Image Override */
-    .hero-bg {
-      background: linear-gradient(135deg, rgba(5,5,5,0.9) 0%, rgba(5,5,5,0.4) 100%),
-                  url("https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80") center/cover;
-      background-attachment: fixed;
-    }
-    
-    /* Animations */
-    @keyframes glitch {
-      0% { transform: translate(0) }
-      20% { transform: translate(-2px, 2px) }
-      40% { transform: translate(-2px, -2px) }
-      60% { transform: translate(2px, 2px) }
-      80% { transform: translate(2px, -2px) }
-      100% { transform: translate(0) }
-    }
-    .glitch-hover:hover { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; color: #0ff; }
-    
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
-    .float-anim { animation: float 4s ease-in-out infinite; }
-    
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #111; }
-    ::-webkit-scrollbar-thumb { background: #0ff; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #bc13fe; }
+    /* Reset & Base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; color: #111; background: #fafafa; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: 0; outline: none; }
+    .container { width: min(1180px, 92%); margin: auto; }
 
-    /* Card Hover */
-    .product-card { transition: all 0.4s ease; background: rgba(10,10,10,0.8); backdrop-filter: blur(10px); }
-    .product-card:hover { transform: translateY(-10px) scale(1.02); z-index: 10; }
-    .product-card img { transition: all 0.5s ease; filter: grayscale(40%) contrast(120%); }
-    .product-card:hover img { filter: grayscale(0%) contrast(110%); }
+    /* Premium Header */
+    header { 
+      position: sticky; top: 0; z-index: 50; 
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); 
+      border-bottom: 1px solid rgba(0,0,0,0.05); 
+    }
+    .nav { height: 80px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 24px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; display: flex; align-items: center; gap: 4px; }
+    .logo span { color: #888; font-weight: 500; }
     
-    .btn-cyber {
-      position: relative; overflow: hidden; transition: all 0.3s;
-      background: transparent; color: #0ff; border: 1px solid #0ff;
+    /* Sleek Nav Links */
+    .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 500; color: #555; }
+    .nav-links a { position: relative; padding-bottom: 4px; transition: color 0.3s; }
+    .nav-links a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: #111; transition: width 0.3s ease; }
+    .nav-links a:hover { color: #111; }
+    .nav-links a:hover::after { width: 100%; }
+    
+    /* Interactive Cart */
+    .cart { background: #111; color: #fff; padding: 12px 24px; border-radius: 999px; font-size: 14px; font-weight: 500; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+    .cart:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); background: #000; }
+
+    /* Upgraded Hero Section */
+    .hero { margin-top: 32px; min-height: 520px; border-radius: 24px; overflow: hidden; position: relative; display: flex; align-items: center; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    .hero-bg { 
+      position: absolute; inset: 0; 
+      background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 100%), 
+      url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=85") center/cover; 
+      z-index: 1; transform: scale(1); transition: transform 8s ease; 
     }
-    .btn-cyber::before {
-      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0,255,255,0.4), transparent);
-      transition: all 0.4s;
+    .hero:hover .hero-bg { transform: scale(1.03); }
+    .hero-content { position: relative; z-index: 2; max-width: 600px; padding: 60px; color: white; animation: slideUp 1s ease 0.2s forwards; opacity: 0; transform: translateY(20px); }
+    .eyebrow { text-transform: uppercase; letter-spacing: 3px; font-size: 12px; font-weight: 700; margin-bottom: 16px; display: inline-block; padding: 6px 12px; background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); border-radius: 999px; }
+    h1 { font-size: clamp(40px, 5vw, 64px); line-height: 1.05; letter-spacing: -2px; margin-bottom: 20px; font-weight: 900; text-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .hero p { font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 32px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; background: white; color: #111; padding: 16px 32px; border-radius: 999px; font-weight: 600; transition: all 0.3s ease; }
+    .btn:hover { background: #f0f0f0; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+    /* Product Cards with Smooth Hover */
+    section { padding: 80px 0; }
+    .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; }
+    .section-head h2 { font-size: 32px; letter-spacing: -1px; font-weight: 800; }
+    .section-head span { color: #666; font-size: 15px; font-weight: 500; }
+
+    .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .card { background: #fff; border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.04); cursor: pointer; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    .img-wrap { overflow: hidden; height: 300px; }
+    .card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .card:hover img { transform: scale(1.06); }
+    .info { padding: 24px; }
+    .category { color: #888; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .name { font-weight: 700; font-size: 18px; margin-bottom: 16px; color: #111; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; }
+    .price { font-weight: 800; font-size: 18px; }
+    
+    /* Add to Cart Plus Button */
+    .add { width: 40px; height: 40px; border-radius: 50%; background: #f4f4f4; color: #111; font-size: 20px; font-weight: 400; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+    .card:hover .add { background: #111; color: #fff; transform: rotate(90deg); }
+
+    /* Minimalist Features */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 20px 0 80px; }
+    .feature { background: #fff; padding: 40px 32px; border-radius: 24px; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.04); }
+    .feature:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+    .feature b { display: block; margin-bottom: 12px; font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
+    .feature p { color: #666; font-size: 14px; line-height: 1.6; }
+
+    footer { padding: 40px 0; border-top: 1px solid rgba(0,0,0,0.05); color: #666; font-size: 14px; font-weight: 500; display: flex; justify-content: space-between; }
+
+    @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 900px) {
+      .products { grid-template-columns: repeat(2, 1fr); }
+      .features { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
     }
-    .btn-cyber:hover::before { left: 100%; }
-    .btn-cyber:hover { background: rgba(0,255,255,0.1); box-shadow: 0 0 15px rgba(0,255,255,0.4); }
   </style>
 </head>
-<body class="antialiased selection:bg-cyan-500 selection:text-black">
-  <div class="bg-grid"></div>
+<body>
 
-  <!-- Navbar -->
-  <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-cyan-900/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        <div class="flex-shrink-0">
-          <span class="logo text-3xl font-black tracking-tighter text-white glitch-hover cursor-pointer">
-            NOVA<span class="text-cyan-400">PRIME</span>
-          </span>
-        </div>
-        <div class="hidden md:block">
-          <div class="ml-10 flex items-baseline space-x-8">
-            <a href="#" class="text-gray-300 hover:text-cyan-400 px-3 py-2 text-sm font-semibold tracking-widest uppercase transition-colors glitch-hover">Drop 01</a>
-            <a href="#" class="text-gray-300 hover:text-cyan-400 px-3 py-2 text-sm font-semibold tracking-widest uppercase transition-colors glitch-hover">Men</a>
-            <a href="#" class="text-gray-300 hover:text-cyan-400 px-3 py-2 text-sm font-semibold tracking-widest uppercase transition-colors glitch-hover">Women</a>
-            <a href="#" class="text-gray-300 hover:text-purple-400 px-3 py-2 text-sm font-semibold tracking-widest uppercase transition-colors glitch-hover">Tech Wear</a>
-          </div>
-        </div>
-        <div>
-          <button onclick="showCart()" class="btn-cyber px-6 py-2 font-bold tracking-wider uppercase text-sm flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-            System (<span id="cartCount">0</span>)
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <div class="relative pt-20 pb-32 flex content-center items-center justify-center min-h-screen hero-bg">
-    <div class="absolute top-0 w-full h-full bg-black/40"></div>
-    <div class="container relative mx-auto px-4 z-10">
-      <div class="items-center flex flex-wrap">
-        <div class="w-full lg:w-8/12 px-4 mx-auto text-center float-anim">
-          <div class="inline-block px-4 py-1 mb-6 border border-cyan-500/30 rounded-full bg-cyan-900/20 backdrop-blur text-cyan-300 text-xs font-bold tracking-[0.2em] uppercase">
-            System Online // Version 2.0
-          </div>
-          <h1 class="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter uppercase neon-text leading-tight">
-            Elevate Your <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Existence.</span>
-          </h1>
-          <p class="mt-4 text-lg text-gray-300 mb-10 max-w-2xl mx-auto font-medium">
-            Next-generation urban gear engineered for the modern dystopian landscape. High-performance fabrics. Uncompromising aesthetics.
-          </p>
-          <a href="#armory" class="neon-box inline-block bg-black/50 text-cyan-400 font-bold px-10 py-4 uppercase tracking-widest transition-all hover:bg-cyan-900/40 hover:scale-105">
-            Initialize Protocol_
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Decorative elements -->
-    <div class="absolute bottom-10 left-10 text-cyan-800 text-xs font-mono hidden md:block">
-      SYS.LOC: 40.7128° N, 74.0060° W<br>
-      STATUS: OPTIMAL
-    </div>
-    <div class="absolute bottom-10 right-10 text-purple-800 text-xs font-mono hidden md:block text-right">
-      PRIME_DIRECTIVE_ACTIVE<br>
-      AWAITING_INPUT...
-    </div>
+<header>
+  <div class="container nav">
+    <div class="logo">NOVA <span>PRIME</span></div>
+    <nav class="nav-links">
+      <a href="#">New arrivals</a>
+      <a href="#">Men</a>
+      <a href="#">Women</a>
+      <a href="#">Accessories</a>
+    </nav>
+    <button class="cart" onclick="showCart()">Cart (<span id="cartCount">0</span>)</button>
   </div>
+</header>
 
-  <!-- Products Section -->
-  <section id="armory" class="pb-20 pt-32 relative z-10">
-    <div class="container mx-auto px-4">
-      <div class="flex flex-wrap justify-between items-end mb-16">
-        <div>
-          <h2 class="text-4xl font-bold text-white uppercase tracking-wider">The Armory_</h2>
-          <div class="h-1 w-20 bg-gradient-to-r from-cyan-400 to-purple-500 mt-4"></div>
-        </div>
-        <p class="text-gray-500 font-mono text-sm hidden sm:block">SELECT YOUR GEAR // AVOID DETECTION</p>
-      </div>
-
-      <div class="flex flex-wrap -mx-4">
-        <!-- Item 1 -->
-        <div class="w-full md:w-6/12 lg:w-3/12 px-4 mb-8">
-          <div class="product-card neon-box h-full border border-gray-800 rounded-none overflow-hidden group">
-            <div class="relative h-64 overflow-hidden">
-              <div class="absolute top-2 left-2 z-20 bg-black/80 border border-cyan-500/50 text-cyan-400 text-[10px] px-2 py-1 font-mono">CLASS: ACCESSORY</div>
-              <img alt="Watch" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-80"></div>
-            </div>
-            <div class="p-6 relative">
-              <h3 class="text-xl font-bold mb-2 uppercase tracking-wide group-hover:text-cyan-400 transition-colors">Prime Chrono V2</h3>
-              <p class="text-gray-400 text-sm mb-4 font-mono">Titanium alloy. EMP resistant.</p>
-              <div class="flex justify-between items-center mt-4">
-                <span class="text-xl font-bold text-white">₹8,499</span>
-                <button onclick="addToCart()" class="btn-cyber w-10 h-10 flex items-center justify-center font-bold text-xl">+</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 2 -->
-        <div class="w-full md:w-6/12 lg:w-3/12 px-4 mb-8">
-          <div class="product-card neon-box-purple h-full border border-gray-800 rounded-none overflow-hidden group">
-            <div class="relative h-64 overflow-hidden">
-              <div class="absolute top-2 left-2 z-20 bg-black/80 border border-purple-500/50 text-purple-400 text-[10px] px-2 py-1 font-mono">CLASS: MOBILITY</div>
-              <img alt="Shoes" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-80"></div>
-            </div>
-            <div class="p-6 relative">
-              <h3 class="text-xl font-bold mb-2 uppercase tracking-wide group-hover:text-purple-400 transition-colors">Urban Stealth Kicks</h3>
-              <p class="text-gray-400 text-sm mb-4 font-mono">Sound-dampening sole. Carbon fiber.</p>
-              <div class="flex justify-between items-center mt-4">
-                <span class="text-xl font-bold text-white">₹6,999</span>
-                <button onclick="addToCart()" class="btn-cyber w-10 h-10 flex items-center justify-center font-bold text-xl">+</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="w-full md:w-6/12 lg:w-3/12 px-4 mb-8">
-          <div class="product-card neon-box h-full border border-gray-800 rounded-none overflow-hidden group">
-             <div class="relative h-64 overflow-hidden">
-              <div class="absolute top-2 left-2 z-20 bg-black/80 border border-cyan-500/50 text-cyan-400 text-[10px] px-2 py-1 font-mono">CLASS: STORAGE</div>
-              <img alt="Bag" src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=80" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-80"></div>
-            </div>
-            <div class="p-6 relative">
-              <h3 class="text-xl font-bold mb-2 uppercase tracking-wide group-hover:text-cyan-400 transition-colors">Vanguard Pack</h3>
-              <p class="text-gray-400 text-sm mb-4 font-mono">Faraday cage lined. Weatherproof.</p>
-              <div class="flex justify-between items-center mt-4">
-                <span class="text-xl font-bold text-white">₹4,299</span>
-                <button onclick="addToCart()" class="btn-cyber w-10 h-10 flex items-center justify-center font-bold text-xl">+</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 4 -->
-        <div class="w-full md:w-6/12 lg:w-3/12 px-4 mb-8">
-          <div class="product-card neon-box h-full border border-gray-800 rounded-none overflow-hidden group">
-            <div class="relative h-64 overflow-hidden">
-              <div class="absolute top-2 left-2 z-20 bg-black/80 border border-cyan-500/50 text-cyan-400 text-[10px] px-2 py-1 font-mono">CLASS: OPTICS</div>
-              <img alt="Glasses" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-80"></div>
-            </div>
-            <div class="p-6 relative">
-              <h3 class="text-xl font-bold mb-2 uppercase tracking-wide group-hover:text-cyan-400 transition-colors">Aero Visor X</h3>
-              <p class="text-gray-400 text-sm mb-4 font-mono">Facial recognition disruption.</p>
-              <div class="flex justify-between items-center mt-4">
-                <span class="text-xl font-bold text-white">₹2,499</span>
-                <button onclick="addToCart()" class="btn-cyber w-10 h-10 flex items-center justify-center font-bold text-xl">+</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<main class="container">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="eyebrow">Premium Collection</div>
+      <h1>Everyday essentials, elevated.</h1>
+      <p>Thoughtfully designed pieces for modern everyday living. Clean, comfortable and engineered to last.</p>
+      <a class="btn" href="#shop">Shop collection →</a>
     </div>
   </section>
 
-  <!-- Info Section -->
-  <section class="py-20 relative z-10 border-t border-gray-900 bg-black/60 backdrop-blur-md">
-    <div class="container mx-auto px-4">
-      <div class="flex flex-wrap text-center gap-y-12">
-        <div class="w-full md:w-4/12 px-4">
-          <div class="text-cyan-400 p-3 w-16 h-16 shadow-lg rounded-full border border-cyan-500/30 bg-cyan-900/20 mx-auto mb-6 flex items-center justify-center float-anim">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-          </div>
-          <h5 class="text-xl font-bold uppercase tracking-wide mb-2 text-white">Hyper-Speed Logistics</h5>
-          <p class="text-gray-400 font-mono text-sm">Drone delivery active. Free deployment on orders > ₹999.</p>
+  <section id="shop">
+    <div class="section-head">
+      <h2>Featured products</h2>
+      <span>Curated for you</span>
+    </div>
+
+    <div class="products">
+      <article class="card">
+        <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80" alt="Minimal watch"></div>
+        <div class="info">
+          <div class="category">Accessories</div>
+          <div class="name">Prime Chronograph</div>
+          <div class="price-row"><span class="price">₹8,499</span><button class="add" onclick="addToCart()">+</button></div>
         </div>
-        <div class="w-full md:w-4/12 px-4">
-          <div class="text-purple-400 p-3 w-16 h-16 shadow-lg rounded-full border border-purple-500/30 bg-purple-900/20 mx-auto mb-6 flex items-center justify-center float-anim" style="animation-delay: 1s;">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-          </div>
-          <h5 class="text-xl font-bold uppercase tracking-wide mb-2 text-white">No-Questions Return</h5>
-          <p class="text-gray-400 font-mono text-sm">14-day protocol reversal. Seamless and untraceable.</p>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80" alt="Running shoes"></div>
+        <div class="info">
+          <div class="category">Footwear</div>
+          <div class="name">Nova Urban Runner</div>
+          <div class="price-row"><span class="price">₹6,999</span><button class="add" onclick="addToCart()">+</button></div>
         </div>
-        <div class="w-full md:w-4/12 px-4">
-          <div class="text-cyan-400 p-3 w-16 h-16 shadow-lg rounded-full border border-cyan-500/30 bg-cyan-900/20 mx-auto mb-6 flex items-center justify-center float-anim" style="animation-delay: 2s;">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-          </div>
-          <h5 class="text-xl font-bold uppercase tracking-wide mb-2 text-white">Encrypted Checkout</h5>
-          <p class="text-gray-400 font-mono text-sm">Military-grade encryption. Your data remains yours.</p>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=80" alt="Black backpack"></div>
+        <div class="info">
+          <div class="category">Bags</div>
+          <div class="name">Vanguard Backpack</div>
+          <div class="price-row"><span class="price">₹4,299</span><button class="add" onclick="addToCart()">+</button></div>
         </div>
-      </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap"><img loading="lazy" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80" alt="Sunglasses"></div>
+        <div class="info">
+          <div class="category">Accessories</div>
+          <div class="name">Aero Sunglasses X</div>
+          <div class="price-row"><span class="price">₹2,499</span><button class="add" onclick="addToCart()">+</button></div>
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="relative bg-black pt-8 pb-6 border-t border-cyan-900/50 z-10">
-    <div class="container mx-auto px-4">
-      <div class="flex flex-wrap items-center md:justify-between justify-center">
-        <div class="w-full md:w-6/12 px-4 mx-auto text-center md:text-left mb-4 md:mb-0">
-          <div class="text-sm text-gray-500 font-semibold py-1">
-            © 2026 <span class="text-cyan-400 tracking-wider">NOVA PRIME</span> // SYSTEM.ALL_RIGHTS_RESERVED
-          </div>
-        </div>
-        <div class="w-full md:w-6/12 px-4 mx-auto text-center md:text-right text-xs font-mono text-gray-600">
-          ENGINEERED FOR THE MODERN DYSTOPIA
-        </div>
-      </div>
-    </div>
-  </footer>
+  <div class="features">
+    <div class="feature"><b>Priority shipping</b><p>Free next-day delivery on orders above ₹999.</p></div>
+    <div class="feature"><b>Easy returns</b><p>Simple 14-day returns on eligible products.</p></div>
+    <div class="feature"><b>Secure checkout</b><p>Enterprise-grade protection for your payments.</p></div>
+  </div>
+</main>
 
-  <script>
-    let count = 0;
-    function addToCart() {
-      count++;
-      const counter = document.getElementById("cartCount");
-      counter.textContent = count;
-      counter.classList.add('text-cyan-400', 'font-black');
-      setTimeout(() => counter.classList.remove('text-cyan-400', 'font-black'), 300);
-      
-      // Glitch effect on button press
-      const btn = event.target;
-      btn.style.transform = "scale(0.9)";
-      setTimeout(() => btn.style.transform = "scale(1)", 100);
-    }
-    function showCart() {
-      alert(count ? `[SYSTEM LOG]: ${count} item(s) detected in loadout.` : "[SYSTEM LOG]: Loadout empty. Awaiting input.");
-    }
-  </script>
+<footer>
+  <div class="container">
+    <div>© 2026 NOVA PRIME.</div>
+    <div>Engineered for the modern world.</div>
+  </div>
+</footer>
+
+<script>
+  let count = 0;
+  function addToCart() {
+    count++;
+    document.getElementById("cartCount").textContent = count;
+  }
+  function showCart() {
+    alert(count ? `You have ${count} item${count > 1 ? "s" : ""} in your cart.` : "Your cart is empty.");
+  }
+</script>
+
 </body>
 </html>
