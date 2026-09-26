@@ -35,6 +35,6 @@ jobs:
                 # Check if secret exists without printing its actual value
                 if [ -n "${{ secrets.docker_token }}" ]; then
                   echo "Docker token is set: true"
-                else:
+                else
                   echo "Docker token is set: false"
                 fi

@@ -3,7 +3,7 @@
 name: Day 45 - Docker build and publish
 
 on:
-    push:
+   # push:
         
     workflow_dispatch:
 
