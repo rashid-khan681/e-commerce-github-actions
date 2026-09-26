@@ -18,10 +18,16 @@ on:
             docker_token:
                 description: 'Docker Hub token'
                 required: true
+        outputs:
+            build_version:
+                description: "The generated build version string"
+                value: ${{ jobs.build.outputs.version }}
 
 jobs:
     build:
         runs-on: ubuntu-latest
+        outputs:
+            version: ${{ steps.set_version.outputs.version_tag }}
         steps:
             - name: checkout code
               uses: actions/checkout@v7
@@ -38,3 +44,12 @@ jobs:
                 else
                   echo "Docker token is set: false"
                 fi
+
+            - name: Generated and set version output
+              id: set_version
+              run: |
+                SHORT_SHA=$(git rev-parse --short HEAD)
+                VERSION="v1.0-$SHORT_SHA"
+                echo "version_tag=$VERSION" >> $GITHUB_OUTPUT
+                echo "Generated version: $VERSION"
+                
