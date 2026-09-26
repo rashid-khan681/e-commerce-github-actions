@@ -1,0 +1,38 @@
+# Goal: A custom composite action to bundle greeting and system info steps.
+
+name: 'Setup and Greet'
+description: 'Greets the user in a specified language and prints runner info'
+
+inputs:
+  name:
+    description: 'who to gree'
+    required: false 
+    default: 'en'
+
+outputs:
+  greeted:
+    description: "Whether the greeting was successful"
+    value: ${{ steps.greet.outputs.success }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Print Greeting
+      id: greet
+      shell: bash
+      run: |
+        if [ "${{ inputs.language }}" = "hi" ]; then
+          echo "Namaste, ${{ inputs.name }}!"
+        elif [ "${{ inputs.language }}" = "es" ]; then
+          echo "¡Hola, ${{ inputs.name }}!"
+        else
+          echo "Hello, ${{ inputs.name }}!"
+        fi
+        echo "success=true" >> $GITHUB_OUTPUTS
+
+    - name: Print Date and OS
+      shell: bash
+      run: |
+        echo "Current Date: $(date)"
+        echo "Runner OS: $RUNNER_OS"
+        
