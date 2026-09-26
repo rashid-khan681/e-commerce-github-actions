@@ -4,7 +4,7 @@
 name: Day 43 - Conditionals
 
 on:
-    push:
+    #push:
     pull_request:
     workflow_dispatch:
 
