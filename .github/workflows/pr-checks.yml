@@ -1,0 +1,54 @@
+# Goal: PR validation gate to enforce branch naming, file size limits, and PR descriptions.
+
+name: PR Validation Gate
+
+on:
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    file-size-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v7
+
+            - name: Check for files larger than 1 MB
+              run: |
+                # Finds files > 1MB. If found, it fails the job.
+                LARGE_FILES=$(find . -type f -size +1M)
+                if [ -n "$LARGE_FILES" ]; then
+                  echo "::error::Files larger than 1MB found: $LARGER_FILES"
+                  exit 1
+                else
+                  echo "All files are under 1MB"
+                fi
+
+    branch-name-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Validate Branch Naming Convention
+              run: |
+                BRANCH_NAME="${{ github.head_ref }}"
+                echo "Checking branch: $BRANCH_NAME"
+                # Regex to check if branch starts with feature/, fix/, or docs/
+                if [[ ! "$BRANCH_NAME" =~ ^(feature/|fix/|docs/) ]]; then
+                  echo "::error::Invalid branch name! Must start with feature/, fix/, or docs/"
+                  exit 1
+                else
+                  echo "Branch name follows convention."
+
+    pr-body-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check PR Description
+              run: |
+                PR_BODY="${{ github.event.pull_request.body }}"
+                if [ -z "$PR_BODY" ]; then 
+                  # We use ::warning:: to warn the user without failing the pipeline
+                  echo "::warning::PR description is empty. It is good practice to provide details."
+                else
+                  echo "PR body is present."
+                fi
+                
