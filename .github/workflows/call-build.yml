@@ -3,9 +3,10 @@
 name: Call reusable workflow
 
 on:
-    push:
-        branches:
-            - main
+    #push:
+        #branches:
+           # - main
+    workflow_dispatch: 
 
 jobs:
     call-reusable-build:
