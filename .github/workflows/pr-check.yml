@@ -7,6 +7,10 @@ on:
       - main
     types: [opened, synchronize]
   workflow_dispatch: # Added manual trigger just in case you want to rerun it easily
+
+permissions:
+  contents: read
+
 jobs:
   # Verify the PR Branch
   pr-verification:
