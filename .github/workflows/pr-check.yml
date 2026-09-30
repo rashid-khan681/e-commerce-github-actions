@@ -15,7 +15,12 @@ jobs:
       # Check out the Repository code
       - name: Checkout Code
         uses: actions/checkout@v7
-
+      
+      - name: Check Dependencies for Vulnerabilities
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: critical
+          
       # Print the source branch of PR
       - name: Print Branch Name
         run: |
