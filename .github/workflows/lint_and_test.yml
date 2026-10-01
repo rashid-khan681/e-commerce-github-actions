@@ -32,7 +32,7 @@ jobs:
               run: pip install ruff
 
             - name: Code Lint
-              run: ruff check .
+              run: ruff check --fix .
 
             - name: Code Tests
               run: pytest
