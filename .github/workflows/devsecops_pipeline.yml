@@ -3,7 +3,7 @@
 name: DevSecOps 
 
 on:
-    #push:
+    push:
     workflow_dispatch:
 jobs:
     # Secrets Scan
@@ -15,7 +15,8 @@ jobs:
     code:
         needs: secret-scan
         uses: ./.github/workflows/lint_and_test.yml
-    
+        secrets: inherit
+
     # SAST
     sast:
         needs: code
@@ -26,6 +27,7 @@ jobs:
     dependency-scan:
         needs: sast
         uses: ./.github/workflows/dependency_scan.yml
+        secrets: inherit
 
     # Build & Scan
     build-and-scan:
@@ -42,11 +44,11 @@ jobs:
     # Deploy
     deploy:
         secrets: inherit
-        needs: [docker-push]
+        needs: docker-push
         uses: ./.github/workflows/cd.yml
 
     # DAST (Shift right)
     dast:
         secrets: inherit
-        needs: [deploy]
+        needs: deploy
         uses: ./.github/workflows/dast.yml
