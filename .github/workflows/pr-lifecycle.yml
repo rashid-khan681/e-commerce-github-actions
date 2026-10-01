@@ -11,12 +11,18 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Print PR Details
+              env:
+                ACTION_TYPE: ${{ github.event.action }}
+                PR_TITLE: ${{ github.event.pull_request.title }}
+                PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+                HEAD_REF: ${{ github.head_ref }}
+                BASE_REF: ${{ github.base_ref }}
               run: |
-                echo "Event Type: ${{ github.event.action }}"
-                echo "PR Title: ${{ github.event.pull_request.title }}"
-                echo "PR Author: ${{ github.event.pull_request.user.login }}"
-                echo "Source Branch (Head): ${{ github.head_ref }}"
-                echo "Target Branch (Base): ${{ github.base_ref }}"
+                echo "Event Type: $ACTION_TYPE"
+                echo "PR Title: $PR_TITLE"
+                echo "PR Author: $PR_AUTHOR"
+                echo "Source Branch (Head): $HEAD_REF"
+                echo "Target Branch (Base): $BASE_REF"
 
             - name: Congratulative on Merge
               # This step only runs if the pr was closed AND successfully merged

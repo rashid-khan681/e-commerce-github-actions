@@ -27,5 +27,7 @@ jobs:
           
       # Print the source branch of PR
       - name: Print Branch Name
+        env:
+          HEAD_REF: ${{ github.head_ref }}
         run: |
-          echo "PR check running for branch: ${{ github.head_ref }}"
+          echo "PR check running for branch: $HEAD_REF"
